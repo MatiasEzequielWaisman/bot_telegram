@@ -56,11 +56,11 @@ const QUESTIONS = [
         label: 'Proovedores',
         value: 'Proovedores',
         responseText: '🚧 Información de Proveedores próximamente.',
-        nextState: STATES.QUESTION_2,
+        nextState: STATES.QUESTION_1,
       },
     ],
     validator: 'notEmpty',
-    nextState: STATES.QUESTION_2,
+    nextState: STATES.QUESTION_1,
   },
   {
     state: STATES.MENU_GESTION_GENERAL,
@@ -87,7 +87,7 @@ const QUESTIONS = [
       },
     ],
     validator: 'notEmpty',
-    nextState: STATES.QUESTION_2,
+    nextState: STATES.MENU_GESTION_GENERAL,
   },
   {
     state: STATES.MENU_VESTIDORES,
@@ -126,7 +126,7 @@ const QUESTIONS = [
       },
     ],
     validator: 'notEmpty',
-    nextState: STATES.QUESTION_2,
+    nextState: STATES.MENU_VESTIDORES,
   },
   {
     state: STATES.MENU_PINTURA,
@@ -160,7 +160,7 @@ const QUESTIONS = [
       },
     ],
     validator: 'notEmpty',
-    nextState: STATES.QUESTION_2,
+    nextState: STATES.MENU_PINTURA,
   },
   {
     state: STATES.MENU_ESTUCADO,
@@ -187,7 +187,7 @@ const QUESTIONS = [
       },
     ],
     validator: 'notEmpty',
-    nextState: STATES.QUESTION_2,
+    nextState: STATES.MENU_ESTUCADO,
   },
   {
     state: STATES.MENU_COCINAS,
@@ -219,7 +219,7 @@ const QUESTIONS = [
       },
     ],
     validator: 'notEmpty',
-    nextState: STATES.QUESTION_2,
+    nextState: STATES.MENU_COCINAS,
   },
   {
     state: STATES.MENU_ELECTRICISTA,
@@ -262,31 +262,7 @@ const QUESTIONS = [
       },
     ],
     validator: 'notEmpty',
-    nextState: STATES.QUESTION_2,
-  },
-  {
-    state: STATES.QUESTION_2,
-    field: 'name',
-    text: '¿Cuál es tu nombre?',
-    type: 'text',
-    validator: 'notEmpty',
-    nextState: STATES.QUESTION_3,
-  },
-  {
-    state: STATES.QUESTION_3,
-    field: 'phone',
-    text: '¿Cuál es tu teléfono?',
-    type: 'text',
-    validator: 'phone',
-    nextState: STATES.QUESTION_4,
-  },
-  {
-    state: STATES.QUESTION_4,
-    field: 'description',
-    text: 'Describí brevemente tu necesidad.',
-    type: 'text',
-    validator: 'notEmpty',
-    nextState: STATES.COMPLETED,
+    nextState: STATES.MENU_ELECTRICISTA,
   },
 ];
 
