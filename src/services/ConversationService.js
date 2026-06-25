@@ -84,7 +84,7 @@ class ConversationService {
     }
 
     const updatedAnswers = { ...userState.answers, [currentQuestion.field]: answer.trim() };
-    const nextState = currentQuestion.nextState;
+    const nextState = this._resolveNextState(currentQuestion, answer.trim());
 
     await this.repository.setState(userId, {
       state: nextState,
@@ -105,6 +105,24 @@ class ConversationService {
    */
   async reset(userId) {
     await this.repository.clearState(userId);
+  }
+
+  /**
+   * Resuelve el siguiente estado a partir de la pregunta actual y la respuesta dada.
+   * Permite ramificar el flujo: si la opción elegida define su propio `nextState`,
+   * este tiene prioridad sobre el `nextState` general de la pregunta.
+   * @param {import('../config/questions').Question} question
+   * @param {string} answerValue
+   * @returns {string}
+   */
+  _resolveNextState(question, answerValue) {
+    if (question.type === 'buttons' && Array.isArray(question.options)) {
+      const selectedOption = question.options.find((option) => option.value === answerValue);
+      if (selectedOption && selectedOption.nextState) {
+        return selectedOption.nextState;
+      }
+    }
+    return question.nextState;
   }
 }
 

@@ -4,6 +4,9 @@ const { STATES } = require('./states');
  * @typedef {Object} QuestionOption
  * @property {string} label - Texto visible del botón.
  * @property {string} value - Valor interno que se guarda como respuesta.
+ * @property {string} [nextState] - Si se define, el flujo bifurca a este estado en
+ *   lugar de usar el `nextState` general de la pregunta. Permite que cada botón
+ *   lleve a una pregunta de seguimiento distinta.
  */
 
 /**
