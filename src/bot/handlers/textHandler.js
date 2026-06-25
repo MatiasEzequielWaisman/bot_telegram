@@ -1,12 +1,15 @@
 const { conversationService } = require('../../services');
 const { renderQuestion } = require('./questionRenderer');
 const { sendSummary } = require('./summary');
+const { startHandler } = require('./startHandler');
 const logger = require('../../utils/logger');
 
 /**
  * Handler de mensajes de texto libre.
- * Solo procesa la respuesta si la pregunta actual del usuario espera texto.
- * Si el usuario no tiene una conversación activa, lo invita a iniciar con /start.
+ * Si el usuario no tiene una conversación activa (o ya la completó), cualquier
+ * mensaje de texto (ej. "hola") dispara el inicio del flujo, igual que /start.
+ * Si tiene una conversación activa, procesa el mensaje como respuesta a la
+ * pregunta actual (si esta espera texto).
  *
  * @param {import('telegraf').Context} ctx
  */
@@ -14,13 +17,8 @@ async function textHandler(ctx) {
   const userId = ctx.from.id;
   const { question, isCompleted } = await conversationService.getCurrentQuestion(userId);
 
-  if (isCompleted) {
-    await ctx.reply('Ya completaste tu solicitud. Si querés enviar una nueva, escribí /start.');
-    return;
-  }
-
-  if (!question) {
-    await ctx.reply('Para comenzar, escribí /start.');
+  if (isCompleted || !question) {
+    await startHandler(ctx);
     return;
   }
 
