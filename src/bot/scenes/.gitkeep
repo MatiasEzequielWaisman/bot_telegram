@@ -1,0 +1,5 @@
+Reservado para futuras "scenes" de Telegraf (flujos alternativos, sub-menús,
+conversaciones con ramificaciones) a medida que el bot evolucione hacia
+versiones más complejas (V2+). La V1 implementa su máquina de estados de
+forma explícita en services/ConversationService.js para mantener el flujo
+simple, testeable y desacoplado de Telegraf.

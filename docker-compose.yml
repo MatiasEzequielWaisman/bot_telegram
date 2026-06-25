@@ -1,0 +1,34 @@
+version: '3.9'
+
+services:
+  telegram-bot:
+    build: .
+    container_name: telegram-bot
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+
+    # --- Ejemplo de servicio PostgreSQL para futuras versiones (V2+) ---
+    # Descomentar y ajustar DATABASE_URL en .env cuando se implemente
+    # PostgresUserStateRepository.
+    #
+    # depends_on:
+    #   - postgres
+
+  # postgres:
+  #   image: postgres:16-alpine
+  #   container_name: telegram-bot-db
+  #   restart: unless-stopped
+  #   environment:
+  #     POSTGRES_USER: bot
+  #     POSTGRES_PASSWORD: changeme
+  #     POSTGRES_DB: telegram_bot
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   ports:
+  #     - '5432:5432'
+
+# volumes:
+#   postgres_data:
