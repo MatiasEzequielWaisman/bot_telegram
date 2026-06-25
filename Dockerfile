@@ -1,8 +1,8 @@
 # --- Etapa de dependencias ---
 FROM node:20-alpine AS deps
 WORKDIR /usr/src/app
-COPY package*.json ./
-RUN npm install --omit=dev
+COPY package.json yarn.lock ./
+RUN yarn install --production --frozen-lockfile
 
 # --- Etapa final ---
 FROM node:20-alpine

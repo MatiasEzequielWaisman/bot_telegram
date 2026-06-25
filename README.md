@@ -133,7 +133,7 @@ telegram-bot/
 ### Requisitos
 
 - Node.js **20 LTS** o superior
-- npm 10+
+- Yarn 1.22+ (Classic)
 - Una cuenta de Telegram para crear el bot vía BotFather
 
 ### Dependencias principales
@@ -149,7 +149,7 @@ git clone <url-del-repositorio>
 cd telegram-bot
 
 # 2. Instalar dependencias
-npm install
+yarn install
 
 # 3. Crear el archivo de variables de entorno
 cp .env.example .env
@@ -157,10 +157,10 @@ cp .env.example .env
 # 4. Completar BOT_TOKEN en .env (ver sección siguiente)
 
 # 5. Iniciar el bot
-npm start
+yarn start
 
 # (opcional) modo desarrollo con auto-reload
-npm run dev
+yarn dev
 ```
 
 ---
@@ -198,7 +198,7 @@ LOG_LEVEL=info
 ### 4. Iniciar el proyecto
 
 ```bash
-npm start
+yarn start
 ```
 
 Si todo está bien configurado vas a ver en consola:
@@ -330,15 +330,19 @@ devuelva `{ valid: boolean, errorMessage?: string }`, agregala al objeto
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 nvm install 20
 
+# Instalar Yarn (si no está disponible)
+corepack enable
+corepack prepare yarn@1.22.22 --activate
+
 # Clonar y configurar
 git clone <url-del-repositorio>
 cd telegram-bot
-npm install --omit=dev
+yarn install --production --frozen-lockfile
 cp .env.example .env
 # completar .env con NODE_ENV=production y el BOT_TOKEN real
 
 # Ejecutar con un gestor de procesos (recomendado: pm2)
-npm install -g pm2
+yarn global add pm2
 pm2 start src/app.js --name telegram-bot
 pm2 save
 pm2 startup
@@ -381,7 +385,7 @@ handlers de Telegram.
 
 ### PostgreSQL
 
-1. Instalar el driver: `npm install pg`.
+1. Instalar el driver: `yarn add pg`.
 2. Crear `src/services/storage/PostgresUserStateRepository.js` implementando
    los mismos métodos que `UserStateRepository`
    (`getState`, `setState`, `clearState`), persistiendo `state` y `answers`
