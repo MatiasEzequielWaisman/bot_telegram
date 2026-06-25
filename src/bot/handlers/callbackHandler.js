@@ -44,6 +44,11 @@ async function callbackHandler(ctx) {
   // Quita los botones del mensaje original para evitar respuestas duplicadas.
   await ctx.editMessageReplyMarkup(undefined).catch(() => {});
 
+  const selectedOption = (question.options || []).find((option) => option.value === value);
+  if (selectedOption && selectedOption.responseText) {
+    await ctx.reply(selectedOption.responseText);
+  }
+
   if (result.isCompleted) {
     await sendSummary(ctx, result.answers);
     return;
